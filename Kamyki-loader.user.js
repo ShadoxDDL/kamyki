@@ -13,7 +13,7 @@
 
 (function () {
   "use strict";
-  const SCRIPT_URL = "https://shadoxddl.github.io/kamyki/Kamyki.js?v=1";
+  const SCRIPT_URL = "https://shadoxddl.github.io/kamyki/Kamyki.js?v=2";
   const scripts = window.GARGONEM_PLUGINS ?? (window.GARGONEM_PLUGINS = []);
   scripts.push(SCRIPT_URL);
 })();

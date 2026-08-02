@@ -206,6 +206,15 @@
       this.state = {};
       storage.bind(this, this.mappedKeys);
       managerStorage.bind(this, this.globalMappedKeys);
+      this.commitFontSize = this.commitFontSize.bind(this);
+    }
+
+    commitFontSize(event) {
+      const value = Number(event.currentTarget.value);
+      if (!Number.isFinite(value)) return;
+      const clamped = Math.min(24, Math.max(6, Math.round(value)));
+      storage.set("fontSize", clamped);
+      event.currentTarget.value = String(clamped);
     }
 
     componentDidUpdate() {
@@ -229,11 +238,30 @@
           React.createElement(UI.CheckboxPersistent, { storage, bind: "enabled" })
         ),
         React.createElement(UI.WithLabel, { label: "Rozmiar czcionki" },
-          React.createElement(UI.InputNumberPersistent, {
-            storage,
-            bind: "fontSize",
+          React.createElement("input", {
+            type: "number",
+            inputMode: "numeric",
+            defaultValue: fontSize(),
             min: 6,
-            max: 24
+            max: 24,
+            step: 1,
+            style: { width: 55, textAlign: "center" },
+            onInput: event => {
+              event.stopPropagation();
+              const value = Number(event.currentTarget.value);
+              if (Number.isInteger(value) && value >= 6 && value <= 24) {
+                storage.set("fontSize", value);
+              }
+            },
+            onKeyDown: event => {
+              event.stopPropagation();
+              if (event.key === "Enter") {
+                this.commitFontSize(event);
+                event.currentTarget.blur();
+              }
+            },
+            onKeyUp: event => event.stopPropagation(),
+            onBlur: this.commitFontSize
           })
         ),
         React.createElement("div", {
