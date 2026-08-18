@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Kamyki z podpisami SI - loader
 // @namespace    https://github.com/ShadoxDDL/kamyki
-// @version      1.0.0
+// @version      1.0.1
 // @description  Ładuje Kamyki z podpisami SI z GitHub Pages.
 // @match        https://*.margonem.pl/*
 // @exclude      https://www.margonem.pl/*
@@ -13,7 +13,7 @@
 
 (function () {
   "use strict";
-  const SCRIPT_URL = "https://shadoxddl.github.io/kamyki/Kamyki.js?v=2";
+  const SCRIPT_URL = "https://shadoxddl.github.io/kamyki/Kamyki.js?v=3";
   const scripts = window.GARGONEM_PLUGINS ?? (window.GARGONEM_PLUGINS = []);
   scripts.push(SCRIPT_URL);
 })();

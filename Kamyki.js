@@ -31,13 +31,19 @@
   const storage = new Addons.Storage("kamienie-podpisy-si", {
     enabled: true,
     fontSize: 10,
-    legacyMigrated: false
+    legacyMigrated: false,
+    defaultFontSize10Migrated: false
   }, true);
 
   if (!storage.get("legacyMigrated")) {
     const oldSize = Number(localStorage.getItem("codex_stones_font_size"));
     if (Number.isFinite(oldSize)) storage.set("fontSize", Math.min(24, Math.max(6, oldSize)));
     storage.set("legacyMigrated", true);
+  }
+
+  if (!storage.get("defaultFontSize10Migrated")) {
+    storage.set("fontSize", 10);
+    storage.set("defaultFontSize10Migrated", true);
   }
 
   const CONFIG = {
@@ -47,7 +53,7 @@
     "1527": "HELG", "1746": "KIC", "1901": "CIUT", "1912": "FURB", "2021": "ŹRÓDŁ",
     "2024": "MAGUA", "2063": "BREH", "2308": "SZCZĘT", "2353": "ART", "2354": "ZOR",
     "2355": "TH", "2356": "FUR", "2532": "ZORG", "2646": "VARI", "2729": "FOV",
-    "2766": "MARLO", "3035": "CHOP", "3039": "SET", "3149": "GOB", "3312": "BB",
+    "2766": "MARLO", "3035": "CHOP", "3037": "DRAKO", "3039": "SET", "3149": "GOB", "3312": "BB",
     "3327": "TER", "3339": "PUST", "3340": "VERA", "3341": "CHAG", "3361": "LAMBO",
     "3409": "JACK", "3437": "KOZ", "3466": "OHYD", "3530": "W.STO", "3597": "DENDR",
     "3627": "SILV", "3628": "SILV", "3765": "ZYF", "3883": "REGU", "4046": "SOPEL",
@@ -58,7 +64,7 @@
     "5708": "TEZA", "5709": "TEZA", "5851": "SHEBA", "5856": "BUREK", "5862": "SK",
     "5872": "DWK", "5938": "PRZED", "5939": "M.KOM", "5940": "SADO", "5941": "TS",
     "5942": "SSK", "5943": "STŚ", "5944": "LOCHY", "5945": "BERGA", "5946": "KORYT",
-    "6053": "TORKA", "6055": "DRIADY", "6476": "PRZYZ", "6477": "ŁOWKA", "6537": "JOTUN",
+    "6053": "TORKA", "6055": "DRIADY", "6063": "MONIA", "6476": "PRZYZ", "6477": "ŁOWKA", "6537": "JOTUN",
     "6623": "GRAB", "6627": "LISZ", "6632": "TOLL.A", "6633": "TOL.U", "6772": "NADZ",
     "6781": "FIGL", "6938": "JERT", "6944": "M.RYC", "6945": "M.ŁOW", "6946": "M.MAG",
     "6949": "RENE", "6956": "GRUB", "7060": "ARCY", "7066": "CZACH", "7069": "OZIR",
@@ -66,7 +72,7 @@
     "7477": "ZONS", "7689": "CERAS", "7693": "OGR", "7695": "SAT", "7701": "MYSZ",
     "7827": "ARYT", "7843": "M.MAD", "7848": "MAGU", "7849": "MAGUA", "7859": "ALD",
     "7864": "MARLO", "8181": "FANG", "8187": "WABI", "8532": "MAZ", "8541": "WYSŁ",
-    "8554": "FOV", "8556": "LUN"
+    "8554": "FOV", "8556": "LUN", "8560": "EVE"
   };
 
   let runtimeActive = false;
